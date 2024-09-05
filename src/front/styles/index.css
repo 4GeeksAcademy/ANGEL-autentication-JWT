@@ -1,3 +1,80 @@
-/* 
-    General Styles used on every website (Don't Repeat Yourself)
-*/
+*{
+  margin: 0;
+  padding: 0;
+}
+body{
+  background-color: #F2F2F2;
+}
+.main{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.form-div{
+  width: 450px;
+  height: auto;
+  background-color: white;
+  padding: 1rem 3rem 0 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+}
+.form-div a{
+  font-weight: bold;
+  cursor: pointer;
+}
+.form-div a:hover{
+  color: #3FB296 !important;
+}
+form{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  row-gap: 5rem;
+  margin-bottom: 4rem;
+}
+
+form input{
+  width: 100%;
+  padding: 1rem 0;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid lightgrey;
+}
+form input:focus{
+  outline: none;
+  border-bottom: 1px solid rgb(70, 197, 150);
+}
+form button{
+  background: linear-gradient(90deg, rgb(70, 197, 150), rgb(46, 133, 149));
+  border: none;
+  padding: 1rem 0;
+  font-size: 20px;
+  border-radius: 50px;
+}
+.private-div{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 1rem;
+}
+.private-div button{
+  background-color: #3FB296;
+  border: none;
+  border-radius: 50px;
+  padding: 0.5rem;
+}
+.private-button{
+  margin-top: 4rem;
+}
+.private-button button{
+  background-color: #ce3d53;
+  border: none;
+  border-radius: 50px;
+  padding: 0.5rem;
+}

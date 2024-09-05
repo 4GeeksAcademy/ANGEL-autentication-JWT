@@ -6,7 +6,7 @@ from api.models import db, User
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 from flask_bcrypt import Bcrypt
-from flask_jwt_extended import  JWTManager, create_access_token
+from flask_jwt_extended import  JWTManager, create_access_token, get_jwt_identity, jwt_required
 
 api = Blueprint('api', __name__)
 
@@ -50,14 +50,24 @@ def login():
     
     login_user = User.query.filter_by(email = user_data['email']).first()
     if not login_user:
-      return jsonify({"error": "Email not exist"}), 404
+      return jsonify({"error": "This email has not been registered"}), 404
     
     password_db = login_user.password
-    check_user_validate = bcrypt.check_password_hash(password_db, user_data['password'])
-    if check_user_validate:
+    password_match = bcrypt.check_password_hash(password_db, user_data['password'])
+    if password_match:
       user_id = login_user.id
       access_token = create_access_token(identity=user_id)
-      return jsonify({'access token': access_token, 'name': login_user.name, 'email': login_user.email}), 200
+      return jsonify({'access_token': access_token, 'name': login_user.name, 'email': login_user.email}), 200
+  except Exception as e:
+    return jsonify({"error": str(e)}), 400
+
+#message autenticated
+@api.route('/message', methods=['POST'])
+@jwt_required()
+def message():
+  try:
+    current_user_id = get_jwt_identity()
+    return jsonify({"message": f"Message sent by user {current_user_id}"}), 200
   except Exception as e:
     return jsonify({"error": str(e)}), 400
     
